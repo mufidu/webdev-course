@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= book.name %></title>
+    </head>
+    <body style="text-align: center">
+        <h1><%= book.name %></h1>
+        <p>by <%= book.author %></p>
+        <p>Price: $<%= book.price %></p>
+        <h2>Description</h2>
+        <p><%= book.description %></p>
+        <h2>Category</h2>
+        <a href="/books?category=<%= book.category %>">
+            <%= book.category %>
+        </a>
+        <h2>Status</h2>
+        <p><%= book.status %></p>
+        <h2>Stock</h2>
+        <p><%= book.quantity %></p>
+        <a href="/books">Back</a>
+        <a href="/books/<%= book._id %>/edit">Edit</a>
+        <!-- delete book -->
+        <br />
+        <form action="/books/<%= book._id %>/?_method=DELETE" method="post">
+            <button>Delete</button>
+        </form>
+    </body>
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (e) {
+            let answer = confirm("Do you want to delete?");
+            if (!answer) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</html>

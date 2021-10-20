@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit book</title>
+    </head>
+    <body style="text-align: center">
+        <h1>Edit <%= book.name %></h1>
+        <form action="/books/<%= book._id %>/?_method=PUT" method="POST">
+            <label for="name">Name:</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                value="<%= book.name %>"
+                required
+            />
+            <br />
+            <label for="author">Author</label>
+            <input
+                type="text"
+                id="author"
+                name="author"
+                placeholder="Author"
+                value="<%= book.author %>"
+                required
+            />
+            <br />
+            <label for="price">Price</label>
+            <input
+                type="number"
+                name="price"
+                id="price"
+                placeholder="Price"
+                value="<%= book.price %>"
+                required
+            />
+            <br />
+            <label for="description">Description</label>
+            <textarea
+                name="description"
+                id="description"
+                placeholder="Description"
+                required
+            >
+<%= book.description %> </textarea
+            >
+            <br />
+            <br />
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <% for (category of categories) { %>
+                    <option value="<%= category %>" <%= category === book.category ? 'selected' : '' %>><%= category %></option>  
+                <% } %>
+            </select>
+            <br />
+            <label for="status">Status</label>
+            <select name="status" id="status">
+                <option value="Available" <%= book.status == "Available" ? "selected" : "" %> >Available</option>
+                <option value="Unavailable" <%= book.status == "Unavailable" ? "selected" : "" %> >Unavailable</option>
+            </select>
+            <br />
+            <label for="quantity">Quantity</label>
+            <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                placeholder="Quantity"
+                value="<%= book.quantity %>"
+            />
+            <input type="submit" value="Submit edit" />
+        </form>
+        <a href="/books/<%= book._id %>">Cancel</a>
+    </body>
+</html>
